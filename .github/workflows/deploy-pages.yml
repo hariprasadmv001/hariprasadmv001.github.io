@@ -37,7 +37,9 @@ jobs:
         run: |
           test -f dist/index.html
           test -d dist/assets
-          test -f dist/images/ganesha.jpg
+          test -f dist/images/ganesha.png
+          test -f dist/images/og-preview.jpg
+          grep -q 'og:image' dist/index.html
           ! grep -q '/src/main.jsx' dist/index.html
 
       - name: Configure GitHub Pages
