@@ -3,7 +3,8 @@ import { downloadCalendar, shareWhatsApp } from './utils/calendar'
 import { useAmbientMusic } from './hooks/useAmbientMusic'
 
 const destination = '12.687997,76.961992'
-const mapFallbackUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + destination + '&travelmode=driving'
+// Omit `origin` so Google Maps can detect the visitor's current location.
+const mapDirectionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(destination) + '&travelmode=driving'
 const address = <>Mudalododdi, Koppa Hobli,<br />Maddur Taluk, Mandya District,<br />Karnataka.</>
 
 function Icon({ name, size = 20 }) {
@@ -167,42 +168,21 @@ function Details() {
 }
 
 function Location() {
-  const [status, setStatus] = useState('Tap to use your current location for directions.')
-  const [locating, setLocating] = useState(false)
+  const [status, setStatus] = useState('Google Maps will use your current location for directions.')
+  const [directionsError, setDirectionsError] = useState(false)
   const openDirections = () => {
-    const mapsWindow = window.open('', '_blank')
-    if (mapsWindow) mapsWindow.opener = null
-    const navigate = url => {
-      if (mapsWindow && !mapsWindow.closed) mapsWindow.location.replace(url)
-      else window.open(url, '_blank', 'noopener,noreferrer')
-    }
-    const useFallback = message => {
-      setLocating(false)
-      setStatus(message)
-      navigate(mapFallbackUrl)
-    }
-    if (!navigator.geolocation) {
-      useFallback('Location is unavailable on this device. Google Maps will let you choose a starting point.')
-      return
-    }
-    setLocating(true)
-    setStatus('Requesting your current location for directions…')
+    setDirectionsError(false)
+    setStatus('Opening Google Maps for driving directions…')
     try {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          const origin = position.coords.latitude.toFixed(6) + ',' + position.coords.longitude.toFixed(6)
-          setLocating(false)
-          setStatus('Directions now begin at your current location.')
-          navigate('https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + destination + '&travelmode=driving')
-        },
-        () => useFallback('Location permission was not granted. Google Maps will let you choose a starting point.'),
-        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
-      )
+      // Navigate synchronously from the click, with no blank/about intermediate page.
+      // Google Maps handles current-location detection and its installed-app handoff.
+      window.location.assign(mapDirectionsUrl)
     } catch {
-      useFallback('Location could not be requested. Google Maps will let you choose a starting point.')
+      setDirectionsError(true)
+      setStatus('Google Maps could not be opened. Please try again.')
     }
   }
-  return <section className="location-section reveal"><div className="location-map" aria-label="Illustrated directions motif"><div className="map-route route-a" /><div className="map-route route-b" /><div className="map-route route-c" /><div className="map-grain" /><div className="map-marker"><Icon name="pin" size={29} /></div><p>ILLUSTRATED DIRECTIONS MOTIF</p></div><div className="location-copy"><p className="eyebrow">OUR NEW THRESHOLD</p><h2>WE ARE WAITING<br />FOR YOU!</h2><p className="address">{address}</p><button type="button" className="gold-button directions" onClick={openDirections} disabled={locating}><Icon name="pin" /> {locating ? 'LOCATING YOU…' : 'GET DIRECTIONS TO OUR HOME'}</button><small aria-live="polite">{status}</small></div></section>
+  return <section className="location-section reveal"><div className="location-map" aria-label="Illustrated directions motif"><div className="map-route route-a" /><div className="map-route route-b" /><div className="map-route route-c" /><div className="map-grain" /><div className="map-marker"><Icon name="pin" size={29} /></div><p>ILLUSTRATED DIRECTIONS MOTIF</p></div><div className="location-copy"><p className="eyebrow">OUR NEW THRESHOLD</p><h2>WE ARE WAITING<br />FOR YOU!</h2><p className="address">{address}</p><button type="button" className="gold-button directions" onClick={openDirections}><Icon name="pin" /> GET DIRECTIONS TO OUR HOME</button><small aria-live="polite" role={directionsError ? 'alert' : undefined}>{status}</small>{directionsError && <button type="button" className="gold-button directions" onClick={openDirections}>TRY AGAIN</button>}</div></section>
 }
 
 function Family() {
