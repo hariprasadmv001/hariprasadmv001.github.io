@@ -100,11 +100,12 @@ button:focus-visible,a:focus-visible { outline:3px solid #fff0ad; outline-offset
 .cover-border i:nth-child(4) { right:-2px; bottom:-2px; border-width:0 2px 2px 0; }
 .cover-ganesha-glow { position:absolute; top:14%; width:clamp(148px,26vw,216px); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(247,211,121,.42),rgba(217,151,47,.14) 43%,transparent 71%); filter:blur(3px); }
 .cover-ganesha { position:relative; z-index:1; width:clamp(132px,24vw,196px); max-width:48%; margin:6% 0 8px; filter:drop-shadow(0 11px 9px rgba(12,2,1,.56)) drop-shadow(0 0 12px rgba(250,207,104,.23)); animation:ganeshaFloat 6.5s ease-in-out infinite; }
-.cover-blessing,.cover-family,.cover-date,.cover-open-cue { position:relative; z-index:1; font-family:Cinzel,serif; }
+.cover-blessing,.cover-family,.cover-home,.cover-date,.cover-open-cue { position:relative; z-index:1; font-family:Cinzel,serif; }
 .cover-blessing { color:#f0cd80; font-size:clamp(9px,1.35vw,12px); letter-spacing:.15em; text-shadow:0 1px #240504; }
 .cover-rule { position:relative; z-index:1; width:min(230px,68%); height:1px; margin:17px auto; background:linear-gradient(90deg,transparent,#e3b65d 20%,#f7df9a 50%,#e3b65d 80%,transparent); }
 .card-cover-front strong { position:relative; z-index:1; color:#f4d990; font-family:Cinzel,serif; font-size:clamp(25px,4.8vw,44px); font-weight:600; letter-spacing:.11em; line-height:1.16; text-shadow:0 2px 0 #4a120d,0 0 24px rgba(247,205,106,.2); }
 .cover-family { margin-top:17px; color:#f1ce82; font-size:clamp(10px,1.55vw,13px); letter-spacing:.22em; }
+.cover-home { display:block; width:min(248px,76%); margin:10px auto 0; padding:7px 4px; border-top:1px solid rgba(227,182,93,.72); border-bottom:1px solid rgba(227,182,93,.72); color:#f4d990; font-size:clamp(10px,1.45vw,13px); font-weight:600; letter-spacing:.16em; line-height:1.15; text-shadow:0 1px #4a120d; }
 .cover-date { margin-top:13px; color:#e9c477; font-size:clamp(8px,1.25vw,10px); letter-spacing:.14em; }
 .cover-open-cue { margin-top:auto; color:#fff0bb; font-size:9px; letter-spacing:.15em; opacity:.94; }
 .cover-open-cue b { margin-left:7px; color:#f5c65f; font-size:16px; }
@@ -208,5 +209,113 @@ button:focus-visible,a:focus-visible { outline:3px solid #fff0ad; outline-offset
   .card-cover { top:0; right:0; bottom:0; left:0; width:100%; height:100%; }
   .is-open .invitation-book { transform:none; }
   .is-open .card-cover { transform:translateZ(8px) rotateY(-172deg); }
+}
+
+/* Phone composition: the cover is a complete, centred object before opening;
+   after opening, the same artwork gives way to one readable invitation page. */
+@media (max-width:700px) {
+  html { -webkit-text-size-adjust:100%; }
+  body { overflow-x:hidden; }
+  .utility-bar { top:max(8px,env(safe-area-inset-top)); right:max(8px,env(safe-area-inset-right)); gap:4px; }
+  .utility-bar button { width:40px; min-height:40px; padding:0; justify-content:center; }
+  .utility-bar .language { width:42px; }
+
+  .invitation-wrap { padding:28px max(14px,env(safe-area-inset-right)) 30px max(14px,env(safe-area-inset-left)); }
+  .invitation-stage,.invitation-book-scene { width:calc(100vw - 28px); max-width:calc(100vw - 28px); }
+  .card-controls { width:100%; margin-top:14px; }
+  .card-controls p { min-height:0; margin:0 auto 9px; font-size:15px; line-height:1.15; }
+  .card-toggle { min-height:44px; padding:0 16px; }
+
+  .card-closed.invitation-wrap { min-height:100vh; min-height:100svh; padding-top:max(14px,env(safe-area-inset-top)); padding-bottom:max(14px,env(safe-area-inset-bottom)); align-content:stretch; grid-template-rows:minmax(0,1fr) auto; }
+  .card-closed .invitation-stage { width:min(calc(100vw - 28px),calc(70vh - 92px)); max-width:min(calc(100vw - 28px),calc(70vh - 92px)); align-self:center; }
+  .card-closed .invitation-book { height:auto; aspect-ratio:.7; }
+  .card-closed .card-inside { position:absolute; inset:0; height:100%; min-height:0; overflow:hidden; visibility:hidden; opacity:0; pointer-events:none; }
+  .card-closed .card-controls { align-self:end; }
+  .card-open .invitation-book { aspect-ratio:auto; }
+  .card-open .card-inside { visibility:visible; opacity:1; }
+
+  .card-inside { padding:25px 7% 23px; }
+  .card-inside .ganesha { margin:7px 0; font-size:11px; letter-spacing:.11em; }
+  .invitation-card .ornamental-rule { width:min(210px,78%); margin:8px auto; }
+  .invitation-title { margin:11px 0 9px; font-size:clamp(23px,6.2vw,27px); line-height:1.16; }
+  .lead { margin:10px auto; font-size:clamp(17px,4.8vw,19px); line-height:1.16; }
+  .house-name { margin:2px auto 10px; padding:8px 5px; font-size:clamp(18px,5.6vw,23px); letter-spacing:.055em; }
+  .event-columns { margin:9px 0; }
+  .event-columns div { padding:7px 5px; }
+  .event-columns span,.label { margin-bottom:3px; font-size:8px; }
+  .event-columns strong { font-size:clamp(17px,4.8vw,19px); line-height:1.08; }
+  .venue-copy,.names { margin:3px 0 9px; font-size:clamp(18px,5vw,20px); line-height:1.12; }
+  .closing-copy { margin:11px auto 9px; font-size:clamp(17px,4.7vw,19px); line-height:1.14; }
+  .card-cover-front,.card-cover-back { padding:24px 8% 22px; }
+  .cover-border { inset:13px; }
+  .cover-ganesha { width:min(42%,150px); margin:3% 0 6px; }
+  .cover-blessing { font-size:9px; letter-spacing:.1em; }
+  .cover-rule { margin:10px auto; }
+  .card-cover-front strong { font-size:clamp(22px,6.1vw,28px); }
+  .cover-family { margin-top:10px; font-size:9px; letter-spacing:.16em; }
+  .cover-home { width:min(230px,82%); margin-top:8px; padding:6px 3px; font-size:clamp(9px,2.75vw,11px); letter-spacing:.13em; }
+  .cover-date { margin-top:8px; font-size:7px; letter-spacing:.11em; }
+  .cover-open-cue { font-size:8px; }
+
+  .countdown { padding:36px 8px; }
+  .countdown .eyebrow { margin-bottom:11px; font-size:8px; }
+  .count-unit { padding:0 2px; }
+  .count-unit strong { font-size:clamp(27px,8.2vw,33px); }
+  .count-unit>span { font-size:6px; letter-spacing:.06em; }
+  .culture-section { padding:0 14px 30px; }
+  .thoranam { height:55px; margin:0 -14px; }
+  .thoranam i { width:21px; height:33px; }
+  .culture-section>.culture-inner>p:not(.eyebrow) { margin:10px auto 5px; font-size:19px; line-height:1.18; }
+  .heritage-ganesha { width:min(100%,315px); height:166px; }
+  .details-section { padding:42px 12px; }
+  .details-section>.eyebrow { margin-bottom:9px; }
+  .details-grid { gap:7px; margin-top:18px; }
+  .detail-card { min-height:132px; padding:16px 7px; }
+  .detail-card svg,.detail-symbol { margin-bottom:8px; }
+  .detail-card strong { margin-top:6px; font-size:clamp(16px,4.5vw,18px); line-height:1.07; }
+
+  .location-copy { padding:36px 18px 31px; }
+  .location-copy .eyebrow { margin-bottom:10px; }
+  .address { margin:12px 0; font-size:19px; line-height:1.12; }
+  .location-copy small { margin-top:8px; font-size:14px; line-height:1.15; }
+  .location-map { min-height:190px; }
+  .location-map::before { inset:11px; }
+  .map-marker { width:48px; height:48px; }
+  .map-grain { width:125px; height:125px; }
+  .location-map p { bottom:8px; font-size:7px; }
+  .family-section { padding:42px 14px; }
+  .family-section>.lotus { margin-bottom:8px; }
+  .family-names { margin:15px auto 18px; font-size:21px; line-height:1.25; }
+  .floral-bottom { gap:11px; }
+  .floral-bottom i { width:28px; height:28px; }
+  .actions-section { padding:40px 16px; }
+  .action-buttons { max-width:330px; gap:8px; margin:17px auto; }
+  .action-buttons button,.action-buttons a { min-height:44px; font-size:9px; }
+  .rsvp { font-size:10px; }
+  .closing-section { min-height:0; padding:38px 12px; }
+  .closing-frame { padding:28px 14px; }
+  .closing-ganesha { width:min(100%,310px); height:170px; margin:-19px auto -8px; }
+  .closing-frame>p:not(.eyebrow) { margin:12px auto; font-size:18px; line-height:1.15; }
+  .closing-frame .kannada { font-size:14px!important; line-height:1.45; }
+  .closing-frame h3 { font-size:17px; }
+  .site-footer { padding:15px 14px calc(17px + env(safe-area-inset-bottom)); font-size:12px; }
+
+  .particles i:nth-child(n + 10),.opening-petals i:nth-child(n + 9) { display:none; }
+}
+
+@media (max-width:370px) {
+  .card-closed .invitation-stage { width:min(calc(100vw - 24px),calc(70vh - 88px)); max-width:min(calc(100vw - 24px),calc(70vh - 88px)); }
+  .card-closed.invitation-wrap { padding-top:max(10px,env(safe-area-inset-top)); padding-bottom:max(10px,env(safe-area-inset-bottom)); }
+  .card-controls p { font-size:14px; }
+  .lead { font-size:17px; }
+  .detail-card { min-height:126px; }
+}
+@supports (height:100svh) {
+  @media (max-width:700px) {
+    .card-closed .invitation-stage { width:min(calc(100vw - 28px),calc(70svh - 92px)); max-width:min(calc(100vw - 28px),calc(70svh - 92px)); }
+  }
+  @media (max-width:370px) {
+    .card-closed .invitation-stage { width:min(calc(100vw - 24px),calc(70svh - 88px)); max-width:min(calc(100vw - 24px),calc(70svh - 88px)); }
+  }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; }.particles,.opening-petals { display:none; }.opening { transition:none; } }

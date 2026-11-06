@@ -4,7 +4,7 @@ import { useAmbientMusic } from './hooks/useAmbientMusic'
 
 const destination = '12.687997,76.961992'
 const mapFallbackUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + destination + '&travelmode=driving'
-const address = <>Mudaladoddi, Koppa Hobli,<br />Maddur Taluk, Mandya District,<br />Karnataka.</>
+const address = <>Mudalododdi, Koppa Hobli,<br />Maddur Taluk, Mandya District,<br />Karnataka.</>
 
 function Icon({ name, size = 20 }) {
   const paths = {
@@ -128,7 +128,7 @@ function InvitationCard({ lang, replayToken, sectionRef }) {
   useEffect(() => () => {
     if (replayTimer.current) window.clearTimeout(replayTimer.current)
   }, [])
-  return <section ref={sectionRef} className="invitation-wrap" aria-label="Interactive Gruha Pravesha invitation card">
+  return <section ref={sectionRef} className={'invitation-wrap card-' + cardState} aria-label="Interactive Gruha Pravesha invitation card">
     <div className="opening-petals" aria-hidden="true">{Array.from({ length: 12 }, (_, i) => <i key={i} style={{ '--x': (6 + (i * 29) % 88) + '%', '--delay': ((i % 6) * 0.15) + 's', '--duration': (2.2 + (i % 4) * 0.3) + 's' }} />)}</div>
     <TiltSurface className={'invitation-stage invitation-book-scene' + (isOpen ? ' is-open' : '') + (isClosing ? ' is-closing' : '')}>
       <div className="invitation-book">
@@ -148,7 +148,7 @@ function InvitationCard({ lang, replayToken, sectionRef }) {
           <span className="card-cover-front">
             <span className="cover-border"><i /><i /><i /><i /></span><span className="cover-ganesha-glow" aria-hidden="true" />
             <img className="cover-ganesha" src="/images/ganesha.png" alt="" /><span className="cover-blessing">॥ श्री गणेशाय नमः ॥</span><span className="cover-rule" aria-hidden="true" />
-            <strong>GRUHA PRAVESHA</strong><span className="cover-family">THE HEGGADE FAMILY</span><span className="cover-date">THURSDAY · 12 NOVEMBER 2026</span>
+            <strong>GRUHA PRAVESHA</strong><span className="cover-family">THE HEGGADE FAMILY</span><span className="cover-home">SHRI HARI NILAYA</span><span className="cover-date">THURSDAY · 12 NOVEMBER 2026</span>
             <span className="cover-open-cue">{openLabel} <b aria-hidden="true">✦</b></span>
           </span>
           <span className="card-cover-back" aria-hidden="true"><span className="cover-back-mantra">॥ श्री गणेशाय नमः ॥</span><img className="cover-back-ganesha" src="/images/ganesha.png" alt="" /><strong>A NEW BEGINNING.<br />A NEW HOME.</strong><span className="cover-back-copy">With immense pleasure, we cordially invite you and your family to grace the auspicious occasion of the Gruha Pravesha ceremony of our new home.</span><i className="cover-back-divider" /><span className="cover-back-family">CORDIALLY INVITED BY<br /><b>Mr. Veerendra Heggade<br />Mrs. Shobha<br />Harikiran M. V.<br />Hariprasad M. V.</b></span><em>We warmly welcome you and your family to join us and bless our new home. Your gracious presence will make our celebration more memorable.</em></span>

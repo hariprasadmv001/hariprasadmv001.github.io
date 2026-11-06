@@ -14,8 +14,8 @@ center('GRUHA PRAVESHA', 750, 25, 'F2', '0.208 0.071 0.059')
 center('A ROYAL SOUTH INDIAN HOUSEWARMING INVITATION', 726, 9, 'F1', '0.776 0.604 0.271'); rule(714)
 entries = [
     ('With immense pleasure, we cordially invite you and your family to grace the',680,13,'F3'), ('auspicious occasion of the Gruha Pravesha ceremony of our new home.',663,13,'F3'),
-    ('"HOUSE NAME"',625,20,'F2'), ('DATE & DAY',583,10,'F2'), ('Thursday, 12th November 2026',564,14,'F2'), ('POOJA TIME',528,10,'F2'), ('7:30 AM - 8:30 AM',509,14,'F2'),
-    ('LUNCH',478,10,'F2'), ('12:00 PM (Noon)',459,14,'F2'), ('VENUE',421,10,'F2'), ('Mudaladoddi, Koppa Hobli,',401,13,'F1'), ('Maddur Taluk, Mandya District,',385,13,'F1'),
+    ('SHRI HARI NILAYA',625,20,'F2'), ('DATE & DAY',583,10,'F2'), ('Thursday, 12th November 2026',564,14,'F2'), ('POOJA TIME',528,10,'F2'), ('7:30 AM - 8:30 AM',509,14,'F2'),
+    ('LUNCH',478,10,'F2'), ('12:00 PM (Noon)',459,14,'F2'), ('VENUE',421,10,'F2'), ('Mudalododdi, Koppa Hobli,',401,13,'F1'), ('Maddur Taluk, Mandya District,',385,13,'F1'),
     ('Karnataka.',369,13,'F1'), ('CORDIALLY INVITED BY',333,10,'F2'), ('Mr. Veerendra Heggade',312,13,'F2'), ('Mrs. Shobha',296,13,'F2'), ('Harikiran M. V.',280,13,'F2'),
     ('Hariprasad M. V.',264,13,'F2'), ('We warmly welcome you and your family to join us on this special occasion and bless our new home.',226,10,'F3'),
     ('Your gracious presence will make our celebration more memorable.',210,10,'F3'), ('THE HEGGAGE FAMILY',47,10,'F2')]
