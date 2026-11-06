@@ -212,7 +212,7 @@ function Closing() {
   return <><section className="closing-section"><ParticleField count={12} /><div className="closing-frame"><GaneshaStage className="closing-ganesha" /><p className="eyebrow">WITH EVERY GOOD WISH</p><h2>YOUR PRESENCE IS OUR<br />GREATEST BLESSING.</h2><p>Your gracious presence will make our celebration more memorable.</p><p className="kannada">ಸಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ ನಮ್ಮನ್ನು ಹರಸಿ ಹಾರೈಸಬೇಕಾಗಿ ವಿನಂತಿ.</p><OrnamentalRule /><p className="with-love">WITH LOVE AND REGARDS</p><h3>THE HEGGADE FAMILY</h3></div></section><Footer /></>
 }
 function Footer() {
-  return <footer className="site-footer"><p>Designed &amp; Developed by Theerthananda</p><p>© 2026 All Rights Reserved.</p></footer>
+  return <footer className="site-footer"><p>Designed &amp; Developed by Theerthananda Hariprasad M.V.</p><p>© 2026 All Rights Reserved.</p></footer>
 }
 function UtilityBar({ onReplay, playing, onMusic, lang, setLang }) {
   return <nav className="utility-bar" aria-label="Invitation controls"><button onClick={onMusic} aria-label={playing ? 'Pause background music' : 'Play background music'}><Icon name={playing ? 'pause' : 'music'} /><span>{lang === 'ಕ' ? (playing ? 'ನಿಲ್ಲಿಸಿ' : 'ಸಂಗೀತ') : (playing ? 'PAUSE' : 'MUSIC')}</span></button><button onClick={onReplay}><Icon name="replay" /><span>{lang === 'ಕ' ? 'ಮತ್ತೆ ನೋಡಿ' : 'REPLAY'}</span></button><button className="language" onClick={() => setLang(lang === 'EN' ? 'ಕ' : 'EN')} aria-label="Change display language">{lang}</button></nav>

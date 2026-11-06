@@ -319,3 +319,145 @@ button:focus-visible,a:focus-visible { outline:3px solid #fff0ad; outline-offset
   }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition-duration:.01ms!important; }.particles,.opening-petals { display:none; }.opening { transition:none; } }
+
+/*
+  Phone booklet: keep the desktop's two physical pages and scale the whole
+  spread to the viewport.  These rules intentionally come after the older
+  single-page phone treatment above: a phone is a small book, not a stacked
+  version of its contents.
+*/
+@media (max-width:700px) {
+  .invitation-wrap {
+    --mobile-book-width:min(calc(100vw - 20px), calc((100svh - 126px) / .735));
+    --mobile-book-height:calc(var(--mobile-book-width) * .735);
+    display:grid;
+    min-height:0;
+    padding:74px 10px 30px;
+    overflow:visible;
+    justify-items:center;
+  }
+
+  .invitation-stage,
+  .invitation-book-scene {
+    width:var(--mobile-book-width);
+    max-width:var(--mobile-book-width);
+    height:var(--mobile-book-height);
+    margin:0;
+    perspective:1050px;
+  }
+
+  /* Override the former one-page, full-screen closed-card sizing. */
+  .card-closed.invitation-wrap {
+    min-height:0;
+    padding:74px 10px 30px;
+    align-content:normal;
+    grid-template-rows:auto auto;
+  }
+  .card-closed .invitation-stage {
+    width:var(--mobile-book-width);
+    max-width:var(--mobile-book-width);
+    height:var(--mobile-book-height);
+    align-self:auto;
+  }
+
+  /* The spread is always two pages wide.  When closed, shifting the book by
+     one quarter centres its left-hand cover within the same full footprint. */
+  .invitation-book {
+    width:100%;
+    height:100%;
+    aspect-ratio:auto;
+    transform:translateX(-25%);
+    transform-origin:center center;
+    transition:transform .86s cubic-bezier(.2,.78,.18,1);
+  }
+  .card-closed .invitation-book { height:100%; aspect-ratio:auto; }
+
+  .book-paper-edges {
+    inset:3px -4px -5px 50%;
+    box-shadow:4px 7px 14px rgba(17,4,2,.42),2px 3px 0 #caa55f,-2px 4px 0 #e7cf9c;
+  }
+
+  .card-inside {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:50%;
+    display:flex;
+    width:50%;
+    height:100%;
+    min-height:0;
+    padding:10px 7px 9px;
+    overflow:hidden;
+    justify-content:center;
+    flex-direction:column;
+    opacity:1;
+    visibility:visible;
+  }
+
+  .card-inside .booklet-only { display:none; }
+  .card-inside > .lotus { width:24px; height:18px; margin:0 auto; transform:scale(.56); transform-origin:center; }
+  .card-inside .ganesha { margin:2px 0; font-size:clamp(5px,1.55vw,6.4px); letter-spacing:.08em; }
+  .card-inside .card-border { inset:5px; }
+  .card-inside .card-border i { width:11px; height:11px; }
+  .card-inside .card-border::before,
+  .card-inside .card-border::after { top:7px; font-size:5px; }
+  .card-inside .card-border::before { left:9px; }
+  .card-inside .card-border::after { right:9px; }
+  .invitation-card .ornamental-rule { width:78%; margin:3px auto; gap:3px; }
+  .invitation-card .ornamental-rule .lotus { width:18px; height:12px; transform:scale(.36); transform-origin:center; }
+  .invitation-title { margin:4px 0 3px; font-size:clamp(10px,3.15vw,13px); line-height:1.1; letter-spacing:.08em; }
+  .house-name { width:88%; margin:0 auto 5px; padding:4px 1px; font-size:clamp(8px,2.55vw,10.5px); letter-spacing:.04em; line-height:1.08; }
+  .event-columns { grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; margin:4px 0; }
+  .event-columns div { min-width:0; padding:2px 2px 3px; border-right:1px solid #d8b56b; border-bottom:0; }
+  .event-columns div:last-child { border-right:0; }
+  .event-columns span,
+  .label { margin-bottom:2px; font-size:clamp(4px,1.15vw,5px); letter-spacing:.1em; }
+  .event-columns strong { font-size:clamp(6px,1.95vw,8px); line-height:1.05; }
+  .venue-copy { margin:1px 0 3px; font-size:clamp(6.5px,2.05vw,8.5px); line-height:1.08; }
+
+  .card-cover {
+    top:0;
+    right:auto;
+    bottom:0;
+    left:50%;
+    width:50%;
+    height:100%;
+    transform:translateZ(6px) rotateY(0deg);
+    transform-origin:left center;
+  }
+
+  .card-cover-front,
+  .card-cover-back { padding:10px 7%; }
+  .cover-border { inset:7px; }
+  .cover-border i { width:13px; height:13px; }
+  .cover-ganesha-glow { width:56px; }
+  .cover-ganesha { width:52px; margin:2% 0 3px; }
+  .cover-blessing { font-size:5px; letter-spacing:.07em; }
+  .cover-rule { width:72%; margin:5px auto; }
+  .card-cover-front strong { font-size:clamp(10px,3.2vw,13px); letter-spacing:.07em; }
+  .cover-family { margin-top:5px; font-size:5px; letter-spacing:.1em; }
+  .cover-home { width:86%; margin-top:4px; padding:3px 1px; font-size:5px; letter-spacing:.07em; }
+  .cover-date { margin-top:4px; font-size:4px; letter-spacing:.06em; }
+  .cover-open-cue { font-size:4px; letter-spacing:.06em; }
+  .cover-open-cue b { margin-left:3px; font-size:7px; }
+
+  /* This face is the welcome-and-family page at the left of the open spread. */
+  .card-cover-back { gap:4px; }
+  .card-cover-back > .cover-back-mantra { font-size:clamp(4px,1.16vw,5px); letter-spacing:.07em; }
+  .cover-back-ganesha { width:clamp(36px,11vw,46px); }
+  .card-cover-back strong { color:#712f1d; font-family:Cinzel,serif; font-size:clamp(8px,2.45vw,10px); font-weight:600; letter-spacing:.055em; line-height:1.16; }
+  .cover-back-copy { max-width:90%; font-size:clamp(6px,1.72vw,7.2px); line-height:1.1; }
+  .cover-back-divider { width:56%; height:1px; background:linear-gradient(90deg,transparent,#bd8938,transparent); }
+  .cover-back-family { color:#8b5720; font-family:Cinzel,serif; font-size:4px; letter-spacing:.07em; line-height:1.2; }
+  .cover-back-family b { display:block; margin-top:2px; color:#512d20; font-family:'Cormorant Garamond',Georgia,serif; font-size:clamp(6px,1.75vw,7.4px); font-weight:600; letter-spacing:0; line-height:1.03; }
+  .card-cover-back em { max-width:88%; font-size:clamp(6px,1.72vw,7.2px); line-height:1.1; }
+
+  .is-open .invitation-book { transform:translateX(0); }
+  .is-open .card-cover { transform:translateZ(6px) rotateY(-180deg); }
+  .is-closing .invitation-book { transform:translateX(-25%); }
+
+  .card-controls { width:100%; margin:11px auto 0; }
+  .card-controls p { display:none; }
+  .card-toggle { min-height:38px; padding:0 14px; font-size:8px; }
+}
